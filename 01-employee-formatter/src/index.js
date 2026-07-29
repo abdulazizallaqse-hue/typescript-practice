@@ -1,33 +1,14 @@
-type Department =
-     "Engineering"
-    | "HR"
-    | "Finance"
-    | "Sales";
-
-type Employee = {
-    id: string;
-    name: string;
-    email: string;
-    age: number;
-    department: Department;
-    isActive: boolean;
-    phoneNumber?: string;
-};
-
-function formatEmployee(employee: Employee): string {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+function formatEmployee(employee) {
     const status = employee.isActive ? "Active" : "Inactive";
     const phone = employee.phoneNumber ?? "No phone number";
-
     return `${employee.name} - ${employee.department} - ${employee.email} - ${status} - ${phone}`;
 }
-
-
-
-function getActiveEmployees(employees: Employee[]): Employee[] {
+function getActiveEmployees(employees) {
     return employees.filter(employee => employee.isActive);
 }
-
-const employees: Employee[] = [
+const employees = [
     {
         id: "EMP-1",
         name: "Ahmed Ali",
@@ -35,7 +16,7 @@ const employees: Employee[] = [
         age: 28,
         department: "Engineering",
         isActive: true,
-        phoneNumber: "+966500000001"
+        // phoneNumber: "+966500000001"
     },
     {
         id: "EMP-2",
@@ -46,6 +27,6 @@ const employees: Employee[] = [
         isActive: false
     }
 ];
-
 console.log(formatEmployee(employees[0]));
 console.log(getActiveEmployees(employees));
+//# sourceMappingURL=index.js.map
