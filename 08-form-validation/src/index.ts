@@ -3,14 +3,16 @@ type LoginForm = {
   email: string;
   password: string;
 }
-
+// Stores validation errors for each field.
+// The property is optional because a field may have no errors.
 type ValidationErrors<T> = {
   [K in keyof T]?: string[];
 };
-
+// Generic validator.
+// Returns an error message if validation fails.
 type Validator<T> = (value: T) => string | undefined
 
-
+// Checks that the value is not empty.
 function required<T>(): Validator<T> {
     return (value: T) => {
         if(value === undefined || value === null || value === ""){
@@ -20,17 +22,26 @@ function required<T>(): Validator<T> {
     }
 }
 
+// Runs all validators for each field.
+// Collects validation errors and returns them.
 function validateForm<T>(
   values: T,
   rules: {
     [K in keyof T]?: Validator<T[K]>[];
   }
 ): ValidationErrors<T> {
+    // Collects all validation errors.
   const errors: ValidationErrors<T> = {};
+  //return string key
+  // Check every field that has validation rules.
   for (const key in rules) {
+    //change it to key of T
     const typedKey = key as keyof T;
+    // Get all validators for the current field.
     const validators = rules[typedKey] || [];
+    // Stores errors 
     const fieldErrors: string[] = [];
+    // Run every validator for the current field.
     for (const validator of validators) {
       const error = validator(values[typedKey]);
       if (error) {
@@ -61,6 +72,7 @@ function maxLength(max: number): Validator<string> {
     }
 }
 
+// Validates the email format using a regular expression.
 function email(): Validator<string> {
     return (value: string) => {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -89,6 +101,7 @@ function max(max: number): Validator<number> {
     }  
 }
 
+// Creates a reusable custom validator.
 function custom<T>(validator: (value: T) => boolean, errorMessage: string): Validator<T> {
     return (value: T) => {
         if(!validator(value)){
