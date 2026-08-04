@@ -1,5 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
+// Example of a successful response.
 const successResponse = {
     success: true,
     data: {
@@ -7,6 +6,7 @@ const successResponse = {
         name: "Ahmed"
     }
 };
+// Example of a failed response.
 const failureResponse = {
     success: false,
     error: {
@@ -14,6 +14,9 @@ const failureResponse = {
         message: "User not found"
     }
 };
+// Handle the API response.
+// Return the data if the request is successful.
+// Print the error and return undefined if it fails.
 function handleApiResponse(response) {
     if (response.success === true) {
         return response.data;
@@ -22,6 +25,8 @@ function handleApiResponse(response) {
         console.log(`Error ${response.error.code}: ${response.error.message}`);
     return undefined;
 }
+// Test
 console.log(handleApiResponse(successResponse));
 console.log(handleApiResponse(failureResponse));
+export {};
 //# sourceMappingURL=index.js.map

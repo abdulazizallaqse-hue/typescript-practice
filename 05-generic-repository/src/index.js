@@ -1,7 +1,7 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 class Repository {
     _items = [];
+    // Add a new item
+    // Throw an error if the ID already exists
     add(item) {
         const existingItem = this._items.find(existing => existing.id === item.id);
         if (existingItem) {
@@ -9,12 +9,16 @@ class Repository {
         }
         this._items.push(item);
     }
+    // Find one item by its ID
     findById(id) {
         return this._items.find(item => item.id === id);
     }
+    // Return all stored items
     getAll() {
         return this._items;
     }
+    // Update an existing item
+    // Only non-ID properties can be changed
     update(id, changes) {
         const item = this.findById(id);
         if (!item) {
@@ -24,6 +28,8 @@ class Repository {
         this._items = this._items.map(existingItem => existingItem.id === id ? updatedItem : existingItem);
         return updatedItem;
     }
+    // Delete an item by its ID
+    // Return true if deleted, otherwise false
     delete(id) {
         const item = this.findById(id);
         if (!item) {
@@ -33,11 +39,13 @@ class Repository {
         return true;
     }
 }
+// Custom error for duplicate IDs
 class DuplicateIdError extends Error {
     constructor() {
         super("Duplicate ID");
     }
 }
+// Custom error when an item cannot be found
 class ItemNotFoundError extends Error {
     constructor() {
         super("Item not found");
@@ -78,4 +86,5 @@ try {
 catch (error) {
     console.log(error);
 }
+export {};
 //# sourceMappingURL=index.js.map

@@ -1,5 +1,3 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 // Generic function.
 // Works with any object type.
 function getProperty(object, key) {
@@ -35,6 +33,7 @@ const name = getProperty(user, "name");
 const age = getProperty(user, "age");
 const updatedUser = updateProperty(user, "age", 31);
 const basicInfo = pickProperties(user, ["id", "name"]);
+export {};
 // Expected inferred types:
 // name: string
 // age: number

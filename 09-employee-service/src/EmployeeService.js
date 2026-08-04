@@ -1,5 +1,6 @@
 import { EmployeeNotFoundError, DuplicateEmailError, InvalidEmployeeInputError } from './errors.js';
 export class EmployeeService {
+    // Stores employees in memory
     _employees = [];
     // Returns all employees after a simulated API delay.
     getEmployees() {
@@ -35,6 +36,7 @@ export class EmployeeService {
                     reject(new InvalidEmployeeInputError("Employee salary must be a positive number."));
                     return;
                 }
+                // Check for duplicate email.
                 const existingEmployee = this._employees.find(emp => emp.email === input.email);
                 if (existingEmployee) {
                     reject(new DuplicateEmailError(`Employee with email ${input.email} already exists.`));
@@ -46,6 +48,7 @@ export class EmployeeService {
                     ...input,
                     createdAt: new Date()
                 };
+                // Save the employee.
                 this._employees.push(newEmployee);
                 resolve(newEmployee);
             }, 1000);
@@ -54,12 +57,14 @@ export class EmployeeService {
     updateEmployee(id, input) {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
+                // Find employee index.
                 const employeeIndex = this._employees.findIndex(emp => emp.id === id);
                 if (employeeIndex === -1) {
                     reject(new EmployeeNotFoundError(`Employee with ID ${id} not found.`));
                     return;
                 }
                 if (input.email) {
+                    // Check if the new email already exists.
                     const existingEmployee = this._employees.find(emp => emp.email === input.email && emp.id !== id);
                     if (existingEmployee) {
                         reject(new DuplicateEmailError(`Employee with email ${input.email} already exists.`));
@@ -78,7 +83,7 @@ export class EmployeeService {
                         return;
                     }
                 }
-                // Update the employee.
+                // Merge existing employee with updated values.
                 this._employees[employeeIndex] = {
                     ...this._employees[employeeIndex],
                     ...input

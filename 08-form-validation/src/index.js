@@ -1,5 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
+// Checks that the value is not empty.
 function required() {
     return (value) => {
         if (value === undefined || value === null || value === "") {
@@ -8,12 +7,21 @@ function required() {
         return undefined;
     };
 }
+// Runs all validators for each field.
+// Collects validation errors and returns them.
 function validateForm(values, rules) {
+    // Collects all validation errors.
     const errors = {};
+    //return string key
+    // Check every field that has validation rules.
     for (const key in rules) {
+        //change it to key of T
         const typedKey = key;
+        // Get all validators for the current field.
         const validators = rules[typedKey] || [];
+        // Stores errors 
         const fieldErrors = [];
+        // Run every validator for the current field.
         for (const validator of validators) {
             const error = validator(values[typedKey]);
             if (error) {
@@ -42,6 +50,7 @@ function maxLength(max) {
         return undefined;
     };
 }
+// Validates the email format using a regular expression.
 function email() {
     return (value) => {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -67,6 +76,7 @@ function max(max) {
         return undefined;
     };
 }
+// Creates a reusable custom validator.
 function custom(validator, errorMessage) {
     return (value) => {
         if (!validator(value)) {
@@ -106,6 +116,7 @@ const employeeErrors = validateForm(employeeData, {
 });
 console.log(employeeData);
 console.log(employeeErrors);
+export {};
 // Expected errors:
 // {
 //   name: ["This field is required"],

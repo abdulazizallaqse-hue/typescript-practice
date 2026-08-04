@@ -1,5 +1,3 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 // Calculate the final price of a product.
 function calculateFinalPrice(product) {
     //Using isPhysicalProduct() function for chicking the type
@@ -43,4 +41,5 @@ const course = {
 // Test
 console.log(calculateFinalPrice(laptop));
 console.log(calculateFinalPrice(course));
+export {};
 //# sourceMappingURL=index.js.map

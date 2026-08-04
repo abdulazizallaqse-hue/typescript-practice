@@ -1,5 +1,3 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 // Generic bank account.
 // Contains the common logic shared by all account types.
 class BankAccount {
@@ -76,4 +74,5 @@ console.log(business.getBalance());
 // 500 - 600 - 6 = -106
 // Transfer example:
 savings.transfer(business, 100);
+export {};
 //# sourceMappingURL=index.js.map
