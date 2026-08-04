@@ -34,7 +34,9 @@ export type PayloadFor<
 
 
 export type NotificationSentEvent = {
-    type: NotificationType;
+  [K in NotificationType]: {
+    type: K;
     sentAt: Date;
-    payload: NotificationPayloadMap[NotificationType];
-};
+    payload: NotificationPayloadMap[K];
+  };
+}[NotificationType];

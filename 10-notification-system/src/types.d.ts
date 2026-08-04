@@ -20,8 +20,10 @@ export type NotificationPayloadMap = {
 };
 export type PayloadFor<T extends NotificationType> = NotificationPayloadMap[T];
 export type NotificationSentEvent = {
-    type: NotificationType;
-    sentAt: Date;
-    payload: NotificationPayloadMap[NotificationType];
-};
+    [K in NotificationType]: {
+        type: K;
+        sentAt: Date;
+        payload: NotificationPayloadMap[K];
+    };
+}[NotificationType];
 //# sourceMappingURL=types.d.ts.map
