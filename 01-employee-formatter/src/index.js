@@ -1,5 +1,3 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 function formatEmployee(employee) {
     const status = employee.isActive ? "Active" : "Inactive";
     const phone = employee.phoneNumber ?? "No phone number";
@@ -16,7 +14,7 @@ const employees = [
         age: 28,
         department: "Engineering",
         isActive: true,
-        // phoneNumber: "+966500000001"
+        phoneNumber: "+966500000001"
     },
     {
         id: "EMP-2",
@@ -29,4 +27,5 @@ const employees = [
 ];
 console.log(formatEmployee(employees[0]));
 console.log(getActiveEmployees(employees));
+export {};
 //# sourceMappingURL=index.js.map
